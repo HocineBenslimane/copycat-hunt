@@ -1,0 +1,113 @@
+{
+  "manifest_version": 3,
+  "name": "Copycat Hunt",
+  "version": "3.27.1",
+  "description": "Flag copycat listings: find copies of your design on eBay and Amazon by image, and listings that hijack your title or photos.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "storage",
+    "cookies",
+    "scripting",
+    "unlimitedStorage",
+    "alarms",
+    "offscreen"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ebay.com/*"
+      ],
+      "js": [
+        "amazon-report-core.js",
+        "vendor/gsap.min.js",
+        "motion.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "exclude_matches": [
+        "https://www.ebay.com/robots.txt",
+        "https://www.ebay.com/signin/*",
+        "https://www.ebay.com/chk/*",
+        "https://www.ebay.com/ws/eBayISAPI.dll*"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.amazon.com/robots.txt",
+        "https://www.amazon.com/ap/*",
+        "https://www.amazon.com/gp/buy/*",
+        "https://www.amazon.com/checkout/*",
+        "https://www.amazon.com/gp/cart/*",
+        "https://www.amazon.com/cart/*"
+      ],
+      "js": [
+        "amazon-report-core.js",
+        "vendor/gsap.min.js",
+        "motion.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/report/infringement*"
+      ],
+      "js": [
+        "amazon-report-core.js",
+        "amazon-report-fill.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": [
+    "https://www.amazon.com/*",
+    "https://www.ebay.com/*",
+    "https://merch.amazon.com/*",
+    "https://api.keygen.sh/*",
+    "https://copycat-hunt-api.djawedbns.workers.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Copycat Hunt",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/Inter-Variable.woff2"
+      ],
+      "matches": [
+        "https://www.ebay.com/*",
+        "https://www.amazon.com/*"
+      ]
+    }
+  ]
+}

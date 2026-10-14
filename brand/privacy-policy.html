@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Copycat Hunt · Privacy Policy</title>
+<style>
+  :root { --text:#1d1d1f; --muted:#5f5f66; --line:#e6e6ea; --accent:#0f9d6e; --bg:#ffffff; --soft:#f6f7f8; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; }
+  h1 { font-size: 34px; line-height: 1.15; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .date { color: var(--muted); margin: 0 0 28px; }
+  h2 { font-size: 21px; margin: 36px 0 10px; letter-spacing: -0.01em; }
+  p, li { color: var(--text); }
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  .box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; }
+  a { color: var(--accent); }
+  .muted { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Copycat Hunt Privacy Policy</h1>
+  <p class="date">Last updated: October 12, 2026</p>
+
+  <div class="box">
+    <b>In short:</b> Copycat Hunt keeps your data in your own browser. It never asks for or stores your eBay or Amazon passwords, it has no ads and no tracking, and we never sell your data. The only things that leave your computer are what the tool needs to work: your license check, listing text sent for comparison, and the searches and reports you start on eBay and Amazon.
+  </div>
+
+  <h2>Who we are</h2>
+  <p>Copycat Hunt is a Chrome extension made by H.Bns LLC ("we", "us"). It helps print-on-demand sellers find listings on eBay and Amazon that copy their designs, and prepare reports about them on the marketplaces' own report forms. Questions about this policy: <a href="mailto:support@h-bns.shop">support@h-bns.shop</a>.</p>
+
+  <h2>What stays on your computer</h2>
+  <p>These are saved only in your browser's extension storage. We can't see them.</p>
+  <ul>
+    <li>Your settings.</li>
+    <li>Listings you track, your hunts, report drafts and your report history.</li>
+    <li>The list of your own products: your Merch on Demand listings (ASIN, marketplace, status, design and listing IDs) and your active eBay listings (item numbers), read from your own Merch dashboard and eBay Seller Hub while you're signed in. Since version 3.24 they're kept in a small database file (SQLite) inside the extension's own browser storage.</li>
+    <li>The contact details you enter for Amazon's report form (name, address, phone, email). They're used only to fill in that form when you start a report.</li>
+    <li>Your license key and a random ID created for this installation.</li>
+  </ul>
+  <p>Uninstalling the extension deletes all of this from your browser.</p>
+
+  <h2>What leaves your computer, and why</h2>
+  <table>
+    <tr><th>Sent to</th><th>What</th><th>Why</th></tr>
+    <tr><td>Keygen (keygen.sh), our license provider</td><td>Your license key and the random installation ID</td><td>To check that your license is valid and which computer it's activated on.</td></tr>
+    <tr><td>Copycat Hunt's server (copycat-hunt-api.djawedbns.workers.dev, run on Cloudflare)</td><td>The title, brand, bullet points and description of your listing and of the look-alike listings being compared, plus a signed proof of your license</td><td>To tell you which listings copied your text. The listing text is not stored. The server keeps short technical logs (a shortened license ID, the number of listings compared, and your country) to prevent abuse.</td></tr>
+    <tr><td>eBay and Amazon</td><td>The requests you start: image searches (the photo you choose), product and search pages, your own Seller Hub and Merch pages, and the report forms you open</td><td>These happen with your own sign-in, the same way they would if you did them yourself in the browser. eBay's and Amazon's own privacy policies apply to what they receive.</td></tr>
+  </table>
+
+  <h2>What we don't do</h2>
+  <ul>
+    <li>We don't sell, rent or share your data with advertisers or data brokers.</li>
+    <li>We don't use analytics or tracking tools, and we don't read your browsing history.</li>
+    <li>We never see or store your eBay or Amazon passwords. The extension does not read cookie values. It only notices when you sign out of Amazon, so it stops treating the old account's products as yours.</li>
+    <li>We don't submit reports for you. Copycat Hunt fills in the form; you review it, tick the declarations and press Submit yourself.</li>
+    <li>We don't use your data for anything other than the features described here.</li>
+  </ul>
+
+  <h2>Permissions the extension asks for</h2>
+  <ul>
+    <li><b>Storage / unlimited storage:</b> to keep your settings, lists and product catalog on your computer (large catalogs need more than the default space).</li>
+    <li><b>Offscreen:</b> to run that product database (SQLite, included in the extension) in a hidden page of the extension. Nothing in it is sent anywhere.</li>
+    <li><b>Scripting:</b> to run eBay requests inside an eBay tab you have open, and to fill in the report form you opened.</li>
+    <li><b>Alarms:</b> to resume an interrupted product sync and run the daily license and catalog check.</li>
+    <li><b>Cookies:</b> only to notice an Amazon sign-out (no cookie values are read).</li>
+    <li><b>Access to ebay.com, amazon.com and merch.amazon.com:</b> for searches, your own listings, page badges and report forms. <b>Access to keygen.sh and our server:</b> for the license check and text comparison.</li>
+  </ul>
+
+  <h2>How long data is kept</h2>
+  <p>Data in your browser stays until you delete it in the extension or uninstall it. Listing text sent to our server is used for the comparison and then discarded. Short technical logs on our server are kept only as long as needed to run and protect the service. Keygen keeps license records as described in its own privacy policy.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li>You can skip connecting Merch or eBay during setup.</li>
+    <li>You can turn off the automatic listing-text check in the extension's menu.</li>
+    <li>You can remove tracked listings, report history and contact details at any time inside the extension, or uninstall it to remove everything.</li>
+    <li>To ask about or delete license records we hold, email <a href="mailto:support@h-bns.shop">support@h-bns.shop</a>.</li>
+  </ul>
+
+  <h2>Children</h2>
+  <p>Copycat Hunt is a business tool for sellers and is not meant for children under 13.</p>
+
+  <h2>Changes</h2>
+  <p>If we change how the extension handles data, we'll update this page and the date at the top.</p>
+
+  <h2>Contact</h2>
+  <p>H.Bns LLC · <a href="mailto:support@h-bns.shop">support@h-bns.shop</a></p>
+
+  <p class="muted">Copycat Hunt is an independent tool. It is not affiliated with, endorsed by or sponsored by eBay or Amazon.</p>
+</main>
+</body>
+</html>

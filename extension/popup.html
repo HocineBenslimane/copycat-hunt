@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Copycat Hunt</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body class="loading">
+  <header class="top">
+    <span class="logo" id="logo"><img src="icons/icon128.png" alt="" /></span>
+    <div class="brand">
+      <div class="name">Copycat Hunt</div>
+      <div class="owner" id="owner"></div>
+    </div>
+  </header>
+
+  <!-- License: a key field when locked; name + expiry when active. -->
+  <section class="group" id="license" aria-live="polite">
+    <div class="lic-body" id="lic-body"></div>
+    <form class="lic-form" id="lic-form" hidden>
+      <input type="text" id="lic-key" placeholder="Paste your license key" autocomplete="off" spellcheck="false" aria-label="License key" />
+      <button type="submit" class="btn primary" id="lic-go">Activate</button>
+    </form>
+    <p class="lic-msg" id="lic-msg" hidden></p>
+    <p class="lic-buy" id="lic-buy" hidden>No license yet? <a id="lic-buy-link" target="_blank" rel="noopener">Get one</a></p>
+  </section>
+
+  <main id="app">
+    <!-- This tab -->
+    <section class="group" id="page" aria-busy="true">
+      <div class="page-head">
+        <i class="site" id="site-mark"></i>
+        <div class="page-text">
+          <div class="page-line" id="page-line"><span class="skel"></span></div>
+          <div class="page-sub" id="page-sub"></div>
+        </div>
+      </div>
+      <button type="button" class="btn primary wide" id="open-main" hidden>Open Copycat Hunt</button>
+      <div class="list" id="page-list"></div>
+    </section>
+
+    <!-- Settings: collapsible, open state remembered -->
+    <section class="group setup-row" id="setup-row" hidden>
+      <div class="setup-text" id="setup-text"></div>
+      <button type="button" class="btn" id="open-setup">Open setup</button>
+    </section>
+
+    <section class="group fold" data-fold="search">
+      <button type="button" class="fold-h" aria-expanded="false"><span>Search</span><small class="fold-sum" id="sum-search"></small><i class="chev"></i></button>
+      <div class="fold-b">
+        <label class="row"><span><i class="dot ebay"></i>eBay</span><input type="checkbox" role="switch" data-pref="searchEbay" /></label>
+        <label class="row"><span><i class="dot amazon"></i>Amazon</span><input type="checkbox" role="switch" data-pref="searchAmazon" /></label>
+        <p class="note" id="one-on" hidden>At least one marketplace stays on.</p>
+      </div>
+    </section>
+
+    <section class="group fold" data-fold="auto">
+      <button type="button" class="fold-h" aria-expanded="false"><span>Automatic checks</span><small class="fold-sum" id="sum-auto"></small><i class="chev"></i></button>
+      <div class="fold-b">
+        <label class="row"><span>Compare Amazon look-alikes' text with yours after a hunt<small>Badges like "Title copied". Off: press "Check listing text" when you want it.</small></span><input type="checkbox" role="switch" data-pref="autoTextCheck" /></label>
+        <label class="row"><span>Recognise my own eBay listing when I open it<small>Adds it to My listings so it's never tracked.</small></span><input type="checkbox" role="switch" data-pref="detectOwn" /></label>
+        <label class="row"><span>Re-check my Merch catalog when I come back to Amazon</span><input type="checkbox" role="switch" data-pref="autoMerchSync" /></label>
+        <p class="hint">Hijack checks never run on their own.</p>
+      </div>
+    </section>
+
+    <section class="group fold" data-fold="page">
+      <button type="button" class="fold-h" aria-expanded="false"><span>On the page</span><small class="fold-sum" id="sum-page"></small><i class="chev"></i></button>
+      <div class="fold-b">
+        <label class="row"><span>"Hunt copycats" button on eBay</span><input type="checkbox" role="switch" data-pref="widgetEbay" /></label>
+        <label class="row"><span>"Hunt copycats" button on Amazon</span><input type="checkbox" role="switch" data-pref="widgetAmazon" /></label>
+        <label class="row"><span>"+" track badges on eBay listings</span><input type="checkbox" role="switch" data-pref="pageBadges" /></label>
+        <label class="row"><span>Details panel when hovering a result</span><input type="checkbox" role="switch" data-pref="hoverPanel" /></label>
+        <label class="row"><span>Glow on the window edges while working</span><input type="checkbox" role="switch" data-pref="heartbeat" /></label>
+        <label class="row"><span>Animations<small>Loading animations in this menu and on the setup page. Your system's "reduce motion" setting always turns them off.</small></span><input type="checkbox" role="switch" data-pref="animations" /></label>
+      </div>
+    </section>
+
+    <section class="group fold" data-fold="report">
+      <button type="button" class="fold-h" aria-expanded="false"><span>Reporting</span><small class="fold-sum" id="sum-report"></small><i class="chev"></i></button>
+      <div class="fold-b">
+        <label class="row"><span>Ask "what did they copy?" before reporting from Tracked</span><input type="checkbox" role="switch" data-pref="askReason" /></label>
+        <p class="hint">Copycat Hunt fills report forms but never ticks the declaration boxes or presses Submit. You always do that yourself.</p>
+      </div>
+    </section>
+
+    <!-- v3.25.0: builder tools. Hidden until the version number is clicked 5 times. -->
+    <section class="group fold" data-fold="builder" id="builder" hidden>
+      <button type="button" class="fold-h" aria-expanded="false"><span>Builder tools</span><small class="fold-sum" id="sum-builder"></small><i class="chev"></i></button>
+      <div class="fold-b">
+        <label class="row"><span>Save search results for a test set<small>Keeps public listing data from your image searches on this computer (ID, photo link, title, position, score) so tracked, reported and skipped results can be exported.</small></span><input type="checkbox" role="switch" data-pref="saveTestSet" /></label>
+        <label class="row"><span>Test image scores<small>After a search, sends your design and the result photo links to the Copycat Hunt scorer and shows how much of the design each photo has. For testing; the numbers aren't a verdict.</small></span><input type="checkbox" role="switch" data-pref="scoreTest" /></label>
+        <p class="hint" id="ts-count"></p>
+        <div class="ts-actions">
+          <button type="button" class="btn small" id="ts-export">Export test set</button>
+          <button type="button" class="link" id="ts-clear">Clear saved results</button>
+          <button type="button" class="link" id="ts-hide">Hide</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="group fix-out" id="fix-out" hidden aria-live="polite">
+      <div class="fix-head">Fix problems</div>
+      <ul class="fix-list" id="fix-list"></ul>
+      <div class="fix-actions">
+        <button type="button" class="link" id="fix-restart">Restart the extension</button>
+        <button type="button" class="link" id="fix-close">Close</button>
+      </div>
+    </section>
+
+    <footer>
+      <span class="ver" id="ver"></span>
+      <button type="button" id="setup-link" class="link">Setup</button>
+      <button type="button" id="fix" class="link" title="Unstick syncs, clear eBay pauses, check the database and the license. Your data stays.">Fix problems</button>
+      <span class="reset-wrap" id="reset-wrap">
+        <button type="button" id="reset" class="link">Reset settings</button>
+      </span>
+    </footer>
+  </main>
+
+  <div class="hud" id="hud" role="status" aria-live="polite"></div>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="motion.js"></script>
+  <script src="links.js"></script>
+  <script src="license-core.js"></script>
+  <script src="testset.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

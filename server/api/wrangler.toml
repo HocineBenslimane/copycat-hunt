@@ -1,0 +1,7 @@
+# Deploy: npx wrangler deploy (from this folder). Secrets (GCP_SA_KEY) are set
+# in the Cloudflare dashboard and are not touched by a deploy.
+name = "copycat-hunt-api"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+preview_urls = false

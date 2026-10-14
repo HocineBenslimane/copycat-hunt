@@ -1,0 +1,109 @@
+# copycat-vision settings. Every limit and threshold lives here, none in code.
+# First values are starting points, to be tuned on labelled data
+# (not measured results).
+
+limits:
+  maxBodyBytes: 3000000         # one /v1/score request (the PNG travels as base64)
+  maxCandidates: 70
+  maxConcurrentRequests: 4      # more at once = 503 (busy), never a pile-up
+  computeWorkers: 2             # candidates compared in parallel (cores)
+  fetchConcurrency: 12          # photo downloads in parallel
+  fetchTimeoutMs: 8000          # per photo, connect + read
+  maxRedirects: 3               # each redirect target is checked again
+  maxImageBytes: 8000000        # a single downloaded or uploaded image
+  maxImagePixels: 40000000      # width x height, checked from the header before decoding
+  allowedFormats: [PNG, JPEG, WEBP]
+
+hosts:
+  amazon: m.media-amazon.com
+  ebay: i.ebayimg.com
+
+original:
+  alphaThreshold: 16            # alpha above this counts as ink
+  minTransparentFraction: 0.05  # less transparent than this = a photo, not a design PNG
+  paddingFraction: 0.04         # padding around the ink box, of its longer side
+  backgrounds:                  # composite the design on each of these (RGB)
+    white: [255, 255, 255]
+    black: [0, 0, 0]
+    gray: [128, 128, 128]
+
+images:
+  longSide: 576                 # working size (512-640); never upscaled
+  claheClip: 2.0                # local contrast
+  claheTile: 8
+  cannyLow: 60
+  cannyHigh: 160
+
+# Likely print areas on a shirt photo, as fractions of the photo:
+# center x, center y, width, height.
+crops:
+  center45: [0.50, 0.48, 0.45, 0.55]
+  center60: [0.50, 0.50, 0.60, 0.65]
+  center75: [0.50, 0.50, 0.75, 0.75]
+  higher: [0.50, 0.42, 0.55, 0.55]
+  lower: [0.50, 0.58, 0.55, 0.55]
+
+# ORB feature matching + RANSAC (build step 3). Starting values, to tune.
+orb:
+  nFeatures: 1500               # keypoints per view (plan: 500-1500)
+  fastThreshold: 12
+  ratioTest: 0.78               # best match must beat the 2nd best by this ratio
+  ransacReprojThreshold: 4.0    # px, at working size
+  ransacMaxIters: 3000
+  ransacConfidence: 0.995
+  minInliers: 15                # fewer = no geometric match
+  scaleRange: [0.12, 3.0]       # size of the design in the candidate, relative
+  maxAspectDistortion: 1.6      # stretched more than this one way = implausible
+  maxPerspective: 0.35          # how far the far edge may shrink vs the near edge
+  minHullFraction: 0.04         # inliers must spread over at least this much of the design
+  # Matching finds the placement itself, so it doesn't need the print crops:
+  # the design (these backgrounds) is matched against the whole photo once.
+  designViews: [white, black]
+  candidateLongSide: 800        # whole-photo view for matching (never enlarged)
+
+# Aligned edge comparison (build step 4). Starting values, to tune.
+edges:
+  tolerancePx: 3                # an edge within this many px counts as matching
+  chamferCap: 20                # px, caps the mean distance
+  tileGrid: 4                   # 4 x 4 tiles over the design
+  minTileEdges: 40              # tiles with fewer design edge pixels are skipped
+  tileRecallMin: 0.5            # a tile "matches" when this much of its outline is found
+  inkMaskDilatePx: 6            # compare around the ink, not the empty canvas
+  borderErodePx: 4              # ignore the photo's own border after warping
+
+# Measurement (eval/, build step 6). Not used by the API.
+eval:
+  fetchConcurrency: 4           # be gentle with Amazon/eBay when scoring an export
+  splitSalt: copycat-v1         # designs split into halves A/B by a hash of their id
+  maxFalsePositiveRate: 0.01    # target for the "probable copy" threshold
+  reviewTop: 50                 # skipped rows that look most like copies, for you to check
+
+# Text vs drawing in a transparent design (app/parts.py). Starting values.
+parts:
+  minPieceFraction: 0.0005      # ignore specks smaller than this share of the ink
+  bigPieceFraction: 0.08        # a piece with this share of the ink is drawing
+  maxLetterHeight: 0.30         # taller than this share of the design = not a letter
+  heightRatioMax: 2.2           # letters in one row: heights within this ratio
+  verticalOverlapMin: 0.5       # ... overlapping this much vertically
+  gapFactor: 1.6                # ... no further apart than this many letter heights
+  minLetters: 3                 # a row needs this many pieces
+  baselineSpread: 0.35          # median distance of bottoms from the row's baseline, of letter height
+  minRowAspect: 2.5             # a row is at least this many letter heights wide
+  attachReach: 0.45             # dots/apostrophes this close (of letter height) join the text
+  surroundReach: 1.0            # look this many piece heights around a small piece...
+  surroundInk: 0.2              # ...if this much of it is drawing ink, the piece is shading, not a letter
+
+# Art vs art pixel difference, only when both sides are transparent PNGs
+# (app/pixels.py, pixelmatch's colour rule).
+pixels:
+  longSide: 256                 # compare at this size (softens anti-aliasing)
+  threshold: 0.1                # pixelmatch default: 0..1, smaller = stricter
+  alphaInk: 16                  # alpha above this counts as ink
+  deltaE: 2.3                   # CIEDE2000 above this = a visible colour difference
+
+# After lining up, compare (app/aligned.py). Recorded, not ranked, until measured.
+aligned:
+  enabled: false                # off in the API (about 40 ms per matched photo); eval/run_eval.py turns it on
+  joinPx: 6                     # differences closer than this form one region
+  detailGrid: 8                 # 8 x 8 cells over the design...
+  detailTopShare: 0.25          # ...the quarter with the most outline is "the detail"

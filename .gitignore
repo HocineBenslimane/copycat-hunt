@@ -1,0 +1,18 @@
+# Dependencies and caches
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.wrangler/
+
+# Never commit secrets or local data
+.env
+.env.*
+*.key
+*key*.json
+*.pem
+*.csv
+
+# Build output
+*.zip
