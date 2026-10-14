@@ -16,13 +16,13 @@
 </p>
 
 <p align="center"><b>Finds copies of your T-shirt designs on Amazon and eBay, groups them by design, and fills the report forms for you.</b><br/>
-For print-on-demand sellers on Amazon Merch on Demand, eBay and Etsy.</p>
+For print-on-demand sellers on Amazon Merch on Demand, eBay & Soon Etsy.</p>
 
 <p align="center"><img src="docs/screenshots/ebay-hunt.png" alt="A hunt from an eBay listing: your listing outlined in green, 60 eBay and 30 Amazon look-alikes, copies tracked" width="820" /></p>
 
 ## 🎯 The problem
 
-Print-on-demand sellers (Amazon Merch on Demand, eBay, Etsy) live from their
+Print-on-demand sellers (Amazon Merch on Demand, eBay, & soon Etsy) live from their
 designs. When a design starts to sell, copies appear within days: the same
 art re-uploaded, traced with a hat added, or redrawn with the same elements.
 Finding them means searching the marketplaces by hand, one design at a time,
