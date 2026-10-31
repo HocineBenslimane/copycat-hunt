@@ -1,0 +1,19 @@
+name = "copycat-hunt-api"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+preview_urls = false
+
+routes = [{ pattern = "api.copycathunt.com", custom_domain = true }]
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+
+[[kv_namespaces]]
+binding = "OPS"
+id = "YOUR_KV_NAMESPACE_ID"
+
+[vars]
+OWNER_LICENSES = ""
+PORTAL_LOGIN_URL = "https://billing.stripe.com/p/login/YOUR_PORTAL"
