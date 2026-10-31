@@ -229,8 +229,8 @@ Store update brings the store version level.
 ## 🗓️ Built before and during the programme
 
 The project started in **August 2026**, before the programme, as a small eBay
-helper: item-number badges on eBay listings and an eBay image search for
-copies.
+helper for myself: it only showed item numbers on eBay listings so I could
+copy them. It had no image search, no Amazon support and no reporting tools.
 
 During the programme (**4 September to October 2026**) I built most of what
 is here: Amazon support (look-alike search, product details, the Amazon
