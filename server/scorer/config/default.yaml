@@ -1,0 +1,143 @@
+limits:
+  maxBodyBytes: 3000000
+  maxCandidates: 70
+  maxConcurrentRequests: 4
+  computeWorkers: 2
+  fetchConcurrency: 12
+  fetchTimeoutMs: 8000
+  maxRedirects: 3
+  maxImageBytes: 8000000
+  maxImagePixels: 40000000
+  allowedFormats: [PNG, JPEG, WEBP]
+
+hosts:
+  amazon: m.media-amazon.com
+  ebay: i.ebayimg.com
+
+original:
+  alphaThreshold: 16
+  minTransparentFraction: 0.05
+  paddingFraction: 0.04
+  backgrounds:
+    white: [255, 255, 255]
+    black: [0, 0, 0]
+    gray: [128, 128, 128]
+
+images:
+  longSide: 576
+  claheClip: 2.0
+  claheTile: 8
+  cannyLow: 60
+  cannyHigh: 160
+
+crops:
+  center45: [0.50, 0.48, 0.45, 0.55]
+  center60: [0.50, 0.50, 0.60, 0.65]
+  center75: [0.50, 0.50, 0.75, 0.75]
+  higher: [0.50, 0.42, 0.55, 0.55]
+  lower: [0.50, 0.58, 0.55, 0.55]
+
+printArea:
+  enabled: true
+  workSize: 400
+  edgeBand: 0.02
+  backdropTolerance: 14
+  minPlainEdge: 0.6
+  minProduct: 0.08
+  inkTolerance: 30
+  lightnessWeight: 0.5
+  outlineBand: 0.02
+  joinGap: 0.025
+  reach: 0.08
+  minPiece: 0.0005
+  minArea: 0.01
+  padding: 0.04
+  minOrbSide: 320
+  orbMargin: 40
+  skin:
+    minY: 60
+    cr: [135, 175]
+    cb: [85, 130]
+    minPiece: 0.002
+    maxShare: 0.6
+
+orb:
+  nFeatures: 1500
+  fastThreshold: 12
+  ratioTest: 0.78
+  ransacReprojThreshold: 4.0
+  ransacMaxIters: 3000
+  ransacConfidence: 0.995
+  minInliers: 15
+  scaleRange: [0.12, 3.0]
+  maxAspectDistortion: 1.6
+  maxPerspective: 0.35
+  minHullFraction: 0.04
+  designViews: [white, black]
+  bunchedRescueInliers: 100
+  candidateLongSide: 800
+
+edges:
+  tolerancePx: 3
+  chamferCap: 20
+  tileGrid: 4
+  minTileEdges: 40
+  tileRecallMin: 0.5
+  inkMaskDilatePx: 6
+  borderErodePx: 4
+
+eval:
+  fetchConcurrency: 4
+  splitSalt: copycat-v1
+  maxFalsePositiveRate: 0.01
+  reviewTop: 50
+
+parts:
+  minPieceFraction: 0.0005
+  bigPieceFraction: 0.08
+  maxLetterHeight: 0.30
+  heightRatioMax: 2.2
+  verticalOverlapMin: 0.5
+  gapFactor: 1.6
+  minLetters: 3
+  baselineSpread: 0.35
+  minRowAspect: 2.5
+  attachReach: 0.45
+  surroundReach: 1.0
+  surroundInk: 0.2
+
+pixels:
+  longSide: 256
+  threshold: 0.1
+  alphaInk: 16
+  deltaE: 2.3
+
+aligned:
+  enabled: false
+  joinPx: 6
+  detailGrid: 8
+  detailTopShare: 0.25
+
+meaning:
+  enabled: true
+  modelsDir: /srv/models
+  clip: clip_vision_q8.onnx
+  dino: dinov2_small_q8.onnx
+  threads: 1
+  inputSize: 224
+  artCanvas: 1.25
+  artBackgrounds:
+    dark: [20, 20, 22]
+    light: [240, 240, 240]
+  squareCanvas: false
+  artCut: "off"                 # 0.2.1: which sides the models see as cut art: off | design | both
+  candidateCropsToo: true
+  artOnCandidateColor: false
+  designCrops:
+    full: [0.50, 0.50, 1.00, 1.00]
+    center45: [0.50, 0.48, 0.45, 0.55]
+    center60: [0.50, 0.50, 0.60, 0.65]
+    center75: [0.50, 0.50, 0.75, 0.75]
+  candidateCrops:
+    center45: [0.50, 0.48, 0.45, 0.55]
+    center75: [0.50, 0.50, 0.75, 0.75]
