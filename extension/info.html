@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copycat Hunt</title>
+  <link rel="icon" href="icons/icon32.png" />
+  <link rel="stylesheet" href="setup.css" />
+  <style>
+    .nb-card { opacity: 1; padding: 22px 24px; }
+    .nb-card p { margin: 0 0 16px; }
+    .nb-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .nb-row .btn { text-decoration: none; padding: 10px 16px; }
+    .nb-help { color: var(--muted); font-size: 13px; margin: 0 !important; }
+    .nb-help a { color: var(--mint-text); }
+  </style>
+  <script src="theme.js"></script>
+</head>
+<body class="compact">
+  <aside class="wall" id="wall" aria-hidden="true"></aside>
+  <main class="wrap">
+    <header class="top">
+      <span class="logo"><img src="icons/icon128.png" alt="" /></span>
+      <h1>This copy can't be used</h1>
+      <p class="sub">This copy of Copycat Hunt isn't the one from the Chrome Web Store, so it's locked and its license was removed from this computer.</p>
+    </header>
+    <div class="card nb-card">
+      <p>Install Copycat Hunt from the Chrome Web Store, then enter your license key again. Then remove this copy.</p>
+      <div class="nb-row">
+        <a class="btn primary" id="go" href="https://chromewebstore.google.com/detail/copycat-hunt/lpipaodhlgeakmanmlmgjhicbhbnhklk" target="_blank" rel="noopener">Open the Chrome Web Store</a>
+        <button type="button" class="btn" id="rm">Uninstall this copy</button>
+      </div>
+      <p class="nb-help">Questions? <a href="mailto:support@copycathunt.com">support@copycathunt.com</a></p>
+    </div>
+  </main>
+  <script src="wall.js"></script>
+  <script src="info.js"></script>
+</body>
+</html>

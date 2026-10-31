@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Copycat Hunt · Setup</title>
+  <link rel="icon" href="icons/icon32.png" />
+  <link rel="stylesheet" href="setup.css" />
+  <script src="theme.js"></script>
+</head>
+<body>
+  <aside class="wall" id="wall" aria-hidden="true"></aside>
+  <main class="wrap">
+    <header class="top">
+      <span class="logo" id="top-logo"><img src="icons/icon128.png" alt="" /></span>
+      <h1>Set up Copycat Hunt</h1>
+      <p class="sub">Add your license and connect your Merch account. eBay is up to you: a free account is enough to report copies there.</p>
+    </header>
+
+    <div class="tabs-note" id="tabs-note" hidden>
+      <b>Before you start:</b> close the other tabs you have open, especially Amazon and eBay. Copycat Hunt only works in pages opened after it was installed, so old tabs won't show it.
+    </div>
+
+    <ol class="steps" id="steps" aria-live="polite">
+      <li class="step" id="step-license">
+        <span class="dot" aria-hidden="true"><b>1</b></span>
+        <div class="card">
+          <div class="step-head"><h2>License</h2><span class="tag" id="license-tag"></span></div>
+          <div class="step-body" id="license-body"></div>
+        </div>
+      </li>
+      <li class="step" id="step-signin">
+        <span class="dot" aria-hidden="true"><b>2</b></span>
+        <div class="card">
+          <div class="step-head"><h2>Merch account</h2><span class="tag" id="signin-tag"></span></div>
+          <div class="step-body" id="signin-body"></div>
+        </div>
+      </li>
+      <li class="step" id="step-sync">
+        <span class="dot" aria-hidden="true"><b>3</b></span>
+        <div class="card">
+          <div class="step-head"><h2>Sync products</h2><span class="tag" id="sync-tag"></span></div>
+          <div class="step-body" id="sync-body"></div>
+        </div>
+      </li>
+      <li class="step" id="step-ebay">
+        <span class="dot" aria-hidden="true"><b>4</b></span>
+        <div class="card">
+          <div class="step-head"><h2>eBay account</h2><span class="tag" id="ebay-tag"></span></div>
+          <div class="step-body" id="ebay-body"></div>
+        </div>
+      </li>
+    </ol>
+
+    <section class="done" id="done" hidden>
+      <span class="done-logo" id="done-logo"></span>
+      <h2>You're all set</h2>
+      <p id="done-text"></p>
+      <button type="button" class="btn primary" data-act="finish">Go to Copycat Hunt</button>
+    </section>
+
+    <footer class="foot">
+      <p>You can close this page at any time. The product sync keeps going in the background and never loses its place.</p>
+      <button type="button" class="link" data-act="skip" id="skip">Skip for now</button>
+    </footer>
+  </main>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="motion.js"></script>
+  <script src="links.js"></script>
+  <script src="setup.js"></script>
+  <script src="wall.js"></script>
+</body>
+</html>

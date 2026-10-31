@@ -1,0 +1,189 @@
+{
+  "manifest_version": 3,
+  "name": "Copycat Hunt",
+  "version": "3.37.0",
+  "description": "Flag copycat listings: find copies of your design on eBay and Amazon by image, and listings that hijack your title or photos.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "storage",
+    "cookies",
+    "scripting",
+    "unlimitedStorage",
+    "alarms",
+    "offscreen"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ebay.com/*"
+      ],
+      "js": [
+        "theme.js",
+        "amazon-report-core.js",
+        "vendor/gsap.min.js",
+        "motion.js",
+        "score-rules.js",
+        "content.js",
+        "messages-page.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "exclude_matches": [
+        "https://www.ebay.com/robots.txt",
+        "https://www.ebay.com/signin/*",
+        "https://www.ebay.com/chk/*",
+        "https://www.ebay.com/ws/eBayISAPI.dll*"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.es/*"
+      ],
+      "exclude_matches": [
+        "https://www.amazon.com/robots.txt",
+        "https://www.amazon.com/ap/*",
+        "https://www.amazon.com/gp/buy/*",
+        "https://www.amazon.com/checkout/*",
+        "https://www.amazon.com/gp/cart/*",
+        "https://www.amazon.com/cart/*",
+        "https://www.amazon.co.uk/robots.txt",
+        "https://www.amazon.co.uk/ap/*",
+        "https://www.amazon.co.uk/gp/buy/*",
+        "https://www.amazon.co.uk/checkout/*",
+        "https://www.amazon.co.uk/gp/cart/*",
+        "https://www.amazon.co.uk/cart/*",
+        "https://www.amazon.de/robots.txt",
+        "https://www.amazon.de/ap/*",
+        "https://www.amazon.de/gp/buy/*",
+        "https://www.amazon.de/checkout/*",
+        "https://www.amazon.de/gp/cart/*",
+        "https://www.amazon.de/cart/*",
+        "https://www.amazon.fr/robots.txt",
+        "https://www.amazon.fr/ap/*",
+        "https://www.amazon.fr/gp/buy/*",
+        "https://www.amazon.fr/checkout/*",
+        "https://www.amazon.fr/gp/cart/*",
+        "https://www.amazon.fr/cart/*",
+        "https://www.amazon.it/robots.txt",
+        "https://www.amazon.it/ap/*",
+        "https://www.amazon.it/gp/buy/*",
+        "https://www.amazon.it/checkout/*",
+        "https://www.amazon.it/gp/cart/*",
+        "https://www.amazon.it/cart/*",
+        "https://www.amazon.es/robots.txt",
+        "https://www.amazon.es/ap/*",
+        "https://www.amazon.es/gp/buy/*",
+        "https://www.amazon.es/checkout/*",
+        "https://www.amazon.es/gp/cart/*",
+        "https://www.amazon.es/cart/*"
+      ],
+      "js": [
+        "theme.js",
+        "amazon-report-core.js",
+        "vendor/gsap.min.js",
+        "motion.js",
+        "score-rules.js",
+        "content.js",
+        "messages-page.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/report/infringement*",
+        "https://www.amazon.co.uk/report/infringement*",
+        "https://www.amazon.de/report/infringement*",
+        "https://www.amazon.fr/report/infringement*",
+        "https://www.amazon.it/report/infringement*",
+        "https://www.amazon.es/report/infringement*"
+      ],
+      "js": [
+        "theme.js",
+        "amazon-report-core.js",
+        "amazon-report-fill.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://merch.amazon.com/*"
+      ],
+      "exclude_matches": [
+        "https://merch.amazon.com/api/*"
+      ],
+      "js": [
+        "messages-page.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": [
+    "https://www.amazon.com/*",
+    "https://www.amazon.co.uk/*",
+    "https://www.amazon.de/*",
+    "https://www.amazon.fr/*",
+    "https://www.amazon.it/*",
+    "https://www.amazon.es/*",
+    "https://www.ebay.com/*",
+    "https://merch.amazon.com/*",
+    "https://api.keygen.sh/*",
+    "https://api.copycathunt.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "action": {
+    "default_title": "Copycat Hunt",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/IBMPlexSans-latin.woff2",
+        "fonts/IBMPlexSans-latin-ext.woff2",
+        "fonts/IBMPlexMono-400-latin.woff2",
+        "fonts/IBMPlexMono-400-latin-ext.woff2",
+        "fonts/IBMPlexMono-500-latin.woff2",
+        "fonts/IBMPlexMono-500-latin-ext.woff2",
+        "popup.html",
+        "icons/ui/*.svg",
+        "icons/flags/*.svg"
+      ],
+      "matches": [
+        "https://www.ebay.com/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.es/*"
+      ]
+    }
+  ]
+}

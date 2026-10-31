@@ -1,0 +1,2 @@
+Country flags (round): us, uk, de, fr, it, es. SVG files downloaded by the Copycat Hunt owner on Oct 29, 2026, as with icons/ui (see icons/ui/LICENSE.txt).
+Shown next to each product in the Best sellers tab (v3.33.1).
